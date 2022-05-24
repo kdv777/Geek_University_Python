@@ -27,8 +27,8 @@ def pars_log(argum):
     result = RE_DATE.match(argum)
     if result:
         return result.groupdict()
-    else:
-        return None
+    # else:
+    #     return None
 
 
 result_ip = []
