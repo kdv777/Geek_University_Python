@@ -27,15 +27,16 @@
 
 
 class Cell:
-
     def __init__(self, quantity):
         self.quantity = int(quantity)
 
+    def __str__(self):
+        return f'{self.quantity}'
+
     def __add__(self, other):
         # Эти методы должны применяться только к клеткам!
-
         # Сложение. Число ячеек общей клетки равняться сумме ячеек исходных двух клеток.
-        return self.quantity + other.quantity
+        return Cell(self.quantity + other.quantity)
 
     def __sub__(self, other):
         """
@@ -45,17 +46,17 @@ class Cell:
         """
         sub_cells = self.quantity - other.quantity
         if sub_cells > 0:
-            return sub_cells
+            return Cell(sub_cells)
         else:
             raise ValueError('Error! Wrong operation!')
 
     def __mul__(self, other):
         # Умножение. Число ячеек общей клетки равняться произведению кол-ва ячеек исходных двух клеток.
-        return self.quantity * other.quantity
+        return Cell(self.quantity * other.quantity)
 
     def __floordiv__(self, other):
         # Деление. Число ячеек общей клетки определяется как целочисленное деление количества ячеек этих двух клеток.
-        return self.quantity // other.quantity
+        return Cell(self.quantity // other.quantity)
 
     def make_order(self, cells_in_line):
         print(f'Исходная клетка: {self.quantity} ячеек. Организовываем по {cells_in_line} ячеек в ряд.')
@@ -72,6 +73,7 @@ c4 = Cell(11)
 c5 = Cell(7)
 c7 = Cell(777)
 print('c1 - c2 = ', c1 - c2)
+print('c1 + c2 = ', c1 + c2)
 print('c4 - c5 = ', c4 - c5)
 print('c1 // c2 = ', c1 // c2)
 print('c2 * c1 = ', c2 * c1)
