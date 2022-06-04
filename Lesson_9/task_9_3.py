@@ -13,32 +13,28 @@
 # атрибутов, вызвать методы экземпляров.
 
 class Worker:
-    name = 'Ivan'
-    surname = 'Ivanov'
-    position = 'manager'
-
-    def __init__(self, wage, bonus):
-        self.wage = wage
-        self.bonus = bonus
-        self._income = {"wage": self.wage, "bonus": self.bonus}
+    def __init__(self, name, surname, position, wage, bonus):
+        self.name = name
+        self.surname = surname
+        self.position = position
+        self._income = {"wage": wage, "bonus": bonus}
 
 
 class Position(Worker):
 
     def get_full_name(self):
-        full_name = f'{self.name} {self.surname}'
-        return full_name
+        return f'{self.name} {self.surname}'
 
     def get_total_income(self):
         # Подумайте, корректно ли в классе наследнике напрямую обращаться к защищенному атрибуту income.
         # Или нужен getter? Аргументируйте ответ.
 
-        total_income = self.wage + self.bonus
+        total_income = self._income["wage"] + self._income["bonus"]
         return total_income
 
 
-w = Worker(3000, 777)
+w = Worker("Иван", "Иванов", "менеджер", 3000, 777)
 print(w._income)
-p = Position(4000, 1000)
+p = Position("Петр", "Петров", "сисадмин", 4000, 1000)
 print(p.get_full_name())
 print(p.get_total_income())
